@@ -1,0 +1,12 @@
+# Minimal example - only the absolute essentials
+# Replace sensor names with your own
+
+type: custom:roxxor-pv-card
+pv1_power: sensor.your_inverter_1_power
+pv2_power: sensor.your_inverter_2_power
+pv3_power: sensor.your_inverter_3_power
+grid_active_power: sensor.your_grid_power
+consump: sensor.your_home_consumption
+battery_soc: sensor.your_battery_soc
+battery_power: sensor.your_battery_power
+today_pv: sensor.your_pv_today_energy

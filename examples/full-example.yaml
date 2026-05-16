@@ -1,0 +1,70 @@
+# Full example - all available options
+# This reflects a real-world setup with:
+#  - 3 Huawei inverters (one MPPT string each)
+#  - JK BMS battery
+#  - evcc as energy manager
+#  - Forecast.Solar for predictions (3 roof orientations)
+#  - Wallbox and heat pump connected via evcc
+
+type: custom:roxxor-pv-card
+
+# ===== PV Generation =====
+pv1_power: sensor.wr_garage_mppt_total_input_power
+pv2_power: sensor.inverter_garten_mppt_total_input_power
+pv3_power: sensor.inverter_keller_mppt_total_input_power
+pv_total_power: sensor.evcc_pv_power           # Fast-updating total (recommended for heartbeat)
+today_pv: sensor.huawei_pv_total_current_day_energy
+
+# ===== Grid =====
+grid_active_power: sensor.evcc_grid_power
+grid_import_today: sensor.evcc_grid_import_energy
+pv_to_grid_today: sensor.evcc_grid_export_energy
+
+# ===== House Consumption =====
+consump: sensor.evcc_home_power
+
+# ===== Battery =====
+battery_soc: sensor.evcc_battery_soc
+battery_power: sensor.evcc_battery_power
+battery_voltage: sensor.battery_battery_voltage
+batt_capacity_wh: 25000
+
+# ===== Inverter =====
+inv_temp: sensor.wr_garage_inverter_internal_temperature
+
+# ===== Wallbox =====
+ev_power: sensor.evcc_wallbox_power
+wallbox_mode: sensor.evcc_wallbox_mode
+wallbox_energy_today: sensor.evcc_wallbox_charge_total
+ev_soc: sensor.evcc_loadpoint_vehicle_soc      # Adjust to your actual entity
+
+# ===== Heat Pump =====
+heatpump_power: sensor.evcc_warmepumpe_charge_power
+
+# ===== Solar Forecast (multi-roof, will be summed) =====
+forecast_today:
+  - sensor.energy_production_today_2
+  - sensor.energy_production_today_3
+  - sensor.energy_production_today_4
+forecast_tomorrow:
+  - sensor.energy_production_tomorrow_2
+  - sensor.energy_production_tomorrow_3
+  - sensor.energy_production_tomorrow_4
+
+# ===== Tariffs =====
+electricity_price: 0.345
+feed_in_tariff: 0.06
+currency: €
+
+# ===== Warning thresholds =====
+warn_soc_low: 15
+warn_inv_temp_high: 60
+
+# ===== Feature toggles =====
+show_sparkline: true
+show_week_compare: true
+show_warnings: true
+
+# ===== Sign conventions (defaults match evcc, only change if directions look wrong) =====
+# grid_positive_means: import         # positive grid value = importing from grid
+# battery_positive_means: discharge   # positive battery value = discharging
