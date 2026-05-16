@@ -1,0 +1,17 @@
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (falls jemand mal bundlen will)
+node_modules/
+package-lock.json
+yarn.lock
+dist/
+
+# Logs
+*.log
