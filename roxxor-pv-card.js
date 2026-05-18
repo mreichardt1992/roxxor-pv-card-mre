@@ -14,7 +14,7 @@
  *  - Hausverbrauch-Trend-Pfeil kleiner und mit Abstand
  *  - Wallbox "today" wird ausgeblendet wenn Sensor fehlt
  */
-class RoxXorPVCard extends HTMLElement {
+class RoxXorPVCardmre extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -1116,5 +1116,5 @@ class RoxXorPVCard extends HTMLElement {
 
   getCardSize() { return 12; }
 }
-customElements.define('roxxor-pv-card', RoxXorPVCard);
+customElements.define('roxxor-pv-card-mre', RoxXorPVCardmre);
 console.info('%c RoxXor-PV-Card %c v5.1 ', 'color:#f4d03f;background:#0d1117;padding:2px 6px;border-radius:3px 0 0 3px;font-weight:bold', 'color:#0d1117;background:#f4d03f;padding:2px 6px;border-radius:0 3px 3px 0;font-weight:bold');
