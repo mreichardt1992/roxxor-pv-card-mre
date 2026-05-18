@@ -1,4 +1,8 @@
-# RoxXor-PV-Card
+# RoxXor-PV-Card-mre
+
+This is a Fork of RoxXorPro's awesome "roxxor-pv-card" for Home Assistant. The labels have been translated to german and the "heatpump" label has been changed to "3D Drucker" to fit my own needs. See the original repo for reference: [RoxXorPro/roxxor-pv-card](https://github.com/RoxXorPro/roxxor-pv-card/
+
+--------- Original Readme File ---------
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
 [![GitHub Release](https://img.shields.io/github/release/RoxXorPro/roxxor-pv-card.svg?style=flat-square)](https://github.com/RoxXorPro/roxxor-pv-card/releases)
