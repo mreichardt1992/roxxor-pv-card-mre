@@ -308,7 +308,7 @@ class RoxXorPVCard extends HTMLElement {
     const pct = (diff / avg) * 100;
     const sign = diff >= 0 ? '+' : '';
     const color = diff >= 0 ? '#3ce878' : '#f0883e';
-    el.innerHTML = `<span style="color:#8b949e">7d avg: ${avg.toFixed(1)} kWh</span> <span style="color:${color}">${sign}${pct.toFixed(0)}%</span>`;
+    el.innerHTML = `<span style="color:#8b949e">Ø 7 Tage: ${avg.toFixed(1)} kWh</span> <span style="color:${color}">${sign}${pct.toFixed(0)}%</span>`;
   }
 
   _render() {
@@ -378,14 +378,14 @@ class RoxXorPVCard extends HTMLElement {
         <span class="title"><span class="title-dot"></span>RoxXor-PV-Card</span>
         <span class="badges">
           <span id="warnBadge" class="badge warn" style="display:none"><span class="warn-icon">⚠</span><span id="warnText">--</span></span>
-          <span id="selfBadge" class="badge self">SELF-USE: --%</span>
-          <span id="autarky" class="badge autarky">AUTARKY: --%</span>
+          <span id="selfBadge" class="badge self">EIGENVERBRAUCH: --%</span>
+          <span id="autarky" class="badge autarky">AUTARKIE: --%</span>
         </span>
       </div>
 
       <!-- Forecast.Solar -->
       <div id="fcBar" class="forecast-bar">
-        <span class="fc-label">FORECAST</span>
+        <span class="fc-label">PROGNOSE</span>
         <div class="fc-track"><div id="fcFill" class="fc-fill" style="width: 0%"></div></div>
         <span class="fc-vals">
           <span id="fcToday">-- / -- kWh</span>
@@ -395,7 +395,7 @@ class RoxXorPVCard extends HTMLElement {
 
       <!-- 24h Sparkline + Week-Compare -->
       <div id="sparklineRow" class="sparkline-row">
-        <span class="spark-label">24H PV</span>
+        <span class="spark-label">24 STD PV</span>
         <svg id="sparkline" viewBox="0 0 100 24" preserveAspectRatio="none">
           <defs>
             <linearGradient id="gradSpark" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -516,7 +516,7 @@ class RoxXorPVCard extends HTMLElement {
             <path d="M 0,8 Q 8,0 16,8 T 32,8 T 48,8" stroke-linejoin="round"/>
             <path d="M 0,15 L 14,15 M 18,15 L 22,15 M 26,15 L 30,15 M 34,15 L 48,15" stroke-dasharray="0" opacity="0.7"/>
           </g>
-          <text x="250" y="227" text-anchor="middle" font-size="9" fill="#8b949e" letter-spacing="1.5" font-weight="600">INVERTER</text>
+          <text x="250" y="227" text-anchor="middle" font-size="9" fill="#8b949e" letter-spacing="1.5" font-weight="600">WECHSELRICHTER</text>
           <text id="invPwr" x="250" y="250" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">0 W</text>
           <text id="invTemp" x="250" y="266" text-anchor="middle" font-size="10" fill="#f0883e">0.0 °C</text>
         </g>
@@ -524,7 +524,7 @@ class RoxXorPVCard extends HTMLElement {
         <!-- BATTERY -->
         <g class="clickable" data-entity="battery_soc">
           <g transform="translate(35, 175)">
-            <text x="40" y="-12" text-anchor="middle" font-size="9" fill="#8b949e" letter-spacing="1.5" font-weight="600">BATTERY</text>
+            <text x="40" y="-12" text-anchor="middle" font-size="9" fill="#8b949e" letter-spacing="1.5" font-weight="600">BATTERIE</text>
             <rect x="0" y="0" width="80" height="105" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
             <rect x="28" y="-5" width="24" height="6" rx="2" fill="#30363d"/>
             <line x1="0" y1="35" x2="80" y2="35" stroke="#21262d" stroke-width="0.8"/>
@@ -540,7 +540,7 @@ class RoxXorPVCard extends HTMLElement {
         <!-- GRID -->
         <g class="clickable" data-entity="grid_active_power">
           <g transform="translate(380, 175)">
-            <text x="40" y="-12" text-anchor="middle" font-size="9" fill="#8b949e" letter-spacing="1.5" font-weight="600">GRID</text>
+            <text x="40" y="-12" text-anchor="middle" font-size="9" fill="#8b949e" letter-spacing="1.5" font-weight="600">NETZ</text>
             <g stroke="#8b949e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path d="M 40,5 L 36,18 L 42,18 L 38,32" stroke="#f0883e" stroke-width="1.8" fill="none"/>
               <path d="M 22,90 L 40,35 L 58,90" stroke-width="2.2"/>
@@ -589,22 +589,10 @@ class RoxXorPVCard extends HTMLElement {
             <line x1="9.5" y1="0" x2="9.5" y2="10"/>
             <line x1="0" y1="5" x2="14" y2="5"/>
           </g>
-          <g transform="translate(0, 16)" class="clickable" data-entity="pv3_power">
-            <rect x="-4" y="-12" width="100" height="14" fill="transparent"/>
-            <circle id="dPv3" cx="3" cy="-3" r="2.5" fill="#f4d03f" opacity="0.3"/>
-            <text x="11" y="0" fill="#8b949e">Keller</text>
-            <text id="vPv3" x="58" y="0" fill="#f4d03f" font-weight="700">0 W</text>
-          </g>
-          <g transform="translate(0, 32)" class="clickable" data-entity="pv2_power">
-            <rect x="-4" y="-12" width="100" height="14" fill="transparent"/>
-            <circle id="dPv2" cx="3" cy="-3" r="2.5" fill="#f4d03f" opacity="0.3"/>
-            <text x="11" y="0" fill="#8b949e">Garten</text>
-            <text id="vPv2" x="58" y="0" fill="#f4d03f" font-weight="700">0 W</text>
-          </g>
-          <g transform="translate(0, 48)" class="clickable" data-entity="pv1_power">
+          <g transform="translate(0, 16)" class="clickable" data-entity="pv1_power">
             <rect x="-4" y="-12" width="100" height="14" fill="transparent"/>
             <circle id="dPv1" cx="3" cy="-3" r="2.5" fill="#f4d03f" opacity="0.3"/>
-            <text x="11" y="0" fill="#8b949e">Garage</text>
+            <text x="11" y="0" fill="#8b949e">Dach</text>
             <text id="vPv1" x="58" y="0" fill="#f4d03f" font-weight="700">0 W</text>
           </g>
         </g>
@@ -654,7 +642,7 @@ class RoxXorPVCard extends HTMLElement {
               </g>
             </g>
             <line x1="60" y1="14" x2="60" y2="44" stroke="#6ab0ff" stroke-width="0.6" opacity="0.25"/>
-            <text x="74" y="24" font-size="11" fill="#8b949e" letter-spacing="1.2" font-weight="600">HEATPUMP</text>
+            <text x="74" y="24" font-size="11" fill="#8b949e" letter-spacing="1.2" font-weight="600">3D DRUCKER</text>
             <text id="vHP" x="74" y="45" font-size="17" font-weight="700" fill="#6ab0ff">0 W</text>
             <circle id="dotHP" cx="204" cy="14" r="3.5" fill="#6ab0ff" opacity="0"/>
           </g>
@@ -663,33 +651,33 @@ class RoxXorPVCard extends HTMLElement {
 
       <div class="economy-bar">
         <div class="eco-item">
-          <div class="eco-label">SAVINGS TODAY</div>
+          <div class="eco-label">ERSPARNIS HEUTE</div>
           <div id="ecoSavings" class="eco-val save">-- €</div>
-          <div class="eco-sub">self-consumed</div>
+          <div class="eco-sub">eigenverbraucht</div>
         </div>
         <div class="eco-item">
-          <div class="eco-label">FEED-IN TODAY</div>
+          <div class="eco-label">EINSPEISUNG HEUTE</div>
           <div id="ecoFeedin" class="eco-val save">-- €</div>
-          <div id="ecoFeedinSub" class="eco-sub">-- kWh exported</div>
+          <div id="ecoFeedinSub" class="eco-sub">-- kWh eingespeist</div>
         </div>
         <div class="eco-item">
-          <div class="eco-label">GRID COST TODAY</div>
+          <div class="eco-label">NETZBEZUG HEUTE</div>
           <div id="ecoCost" class="eco-val cost">-- €</div>
-          <div id="ecoCostSub" class="eco-sub">-- kWh imported</div>
+          <div id="ecoCostSub" class="eco-sub">-- kWh bezogen</div>
         </div>
       </div>
 
       <div class="footer">
         <div class="f-item" data-entity="battery_voltage">
-          <div class="f-label">Battery Voltage</div>
+          <div class="f-label">Batterie Spannung</div>
           <div id="fVolt" class="f-val">-- V</div>
         </div>
         <div class="f-item" data-entity="today_pv">
-          <div class="f-label">PV Today</div>
+          <div class="f-label">PV Heute</div>
           <div id="fToday" class="f-val">-- kWh</div>
         </div>
         <div class="f-item" data-entity="inv_temp">
-          <div class="f-label">Inverter Temp</div>
+          <div class="f-label">Wechselrichter Temp</div>
           <div id="fStat" class="f-val">-- °C</div>
         </div>
       </div>
@@ -738,15 +726,15 @@ class RoxXorPVCard extends HTMLElement {
     const warnings = [];
     // SOC kritisch niedrig
     if (soc < cfg.warn_soc_low && battSigned < -50) {
-      warnings.push({ level: soc < 8 ? 'critical' : 'normal', text: `BATTERY LOW ${soc.toFixed(0)}%` });
+      warnings.push({ level: soc < 8 ? 'critical' : 'normal', text: `BATTERIE NIEDRIG ${soc.toFixed(0)}%` });
     }
     // Inverter heiss
     if (invTemp > cfg.warn_inv_temp_high) {
-      warnings.push({ level: invTemp > cfg.warn_inv_temp_high + 10 ? 'critical' : 'normal', text: `INV TEMP ${invTemp.toFixed(0)}°C` });
+      warnings.push({ level: invTemp > cfg.warn_inv_temp_high + 10 ? 'critical' : 'normal', text: `WR-TEMP ${invTemp.toFixed(0)}°C` });
     }
     // System-Anomalie: hoher Netzbezug bei vollem Speicher und PV
     if (gridSigned > 1500 && soc > 90 && pvTotal > 500) {
-      warnings.push({ level: 'normal', text: 'GRID DRAW DESPITE FULL BATT' });
+      warnings.push({ level: 'normal', text: 'NETZBEZUG TROTZ VOLLER BATT' });
     }
     if (warnings.length === 0) return null;
     // Zeige die kritischste
@@ -763,7 +751,8 @@ class RoxXorPVCard extends HTMLElement {
     const pv2 = this._v(cfg.pv2_power, 'power');
     const pv3 = this._v(cfg.pv3_power, 'power');
 
-    // PV-Gesamtleistung kommt aus dem schnellen evcc-Sensor wenn verfuegbar
+    // PV-Gesamtleistung kommt aus dem schnellen evcc-Sensor wenn verfuegbar.
+    // Fallback summiert weiterhin alle konfigurierten Strings (auch wenn nur "Dach" angezeigt wird).
     const pvTotalFast = this._val(cfg.pv_total_power, 'power');
     const pvTotal = pvTotalFast !== null ? pvTotalFast : (pv1 + pv2 + pv3);
 
@@ -780,13 +769,9 @@ class RoxXorPVCard extends HTMLElement {
     const evPwr = this._v(cfg.ev_power, 'power');
     const hpPwr = this._v(cfg.heatpump_power, 'power');
 
-    // PV Strings (einzelne langsam-updatende Sensoren bleiben)
+    // PV Strings (nur noch "Dach" sichtbar)
     root.getElementById('vPv1').textContent = this._fmtPower(pv1);
-    root.getElementById('vPv2').textContent = this._fmtPower(pv2);
-    root.getElementById('vPv3').textContent = this._fmtPower(pv3);
     root.getElementById('dPv1').setAttribute('opacity', pv1 > 10 ? '1' : '0.3');
-    root.getElementById('dPv2').setAttribute('opacity', pv2 > 10 ? '1' : '0.3');
-    root.getElementById('dPv3').setAttribute('opacity', pv3 > 10 ? '1' : '0.3');
 
     // Inverter zeigt den schnellen Gesamtwert
     root.getElementById('invPwr').textContent = this._fmtPower(pvTotal);
@@ -797,11 +782,11 @@ class RoxXorPVCard extends HTMLElement {
     const gridLabel = root.getElementById('gridLabel');
     const gridPwrEl = root.getElementById('gridPwr');
     if (Math.abs(gridSigned) < 30) {
-      gridLabel.textContent = 'IDLE'; gridLabel.style.fill = '#8b949e'; gridPwrEl.style.fill = '#8b949e';
+      gridLabel.textContent = 'LEERLAUF'; gridLabel.style.fill = '#8b949e'; gridPwrEl.style.fill = '#8b949e';
     } else if (gridSigned > 0) {
-      gridLabel.textContent = 'IMPORT'; gridLabel.style.fill = '#f0883e'; gridPwrEl.style.fill = '#f0883e';
+      gridLabel.textContent = 'BEZUG'; gridLabel.style.fill = '#f0883e'; gridPwrEl.style.fill = '#f0883e';
     } else {
-      gridLabel.textContent = 'EXPORT'; gridLabel.style.fill = '#3ce878'; gridPwrEl.style.fill = '#3ce878';
+      gridLabel.textContent = 'EINSPEISUNG'; gridLabel.style.fill = '#3ce878'; gridPwrEl.style.fill = '#3ce878';
     }
 
     // House + kleiner Trend
@@ -828,7 +813,7 @@ class RoxXorPVCard extends HTMLElement {
       const h = battSigned > 0
         ? ((100 - soc) / 100) * cfg.batt_capacity_wh / battSigned
         : (soc / 100) * cfg.batt_capacity_wh / Math.abs(battSigned);
-      eta.textContent = (battSigned > 0 ? 'Full in ' : 'Empty in ') + h.toFixed(1) + 'h';
+      eta.textContent = (battSigned > 0 ? 'Voll in ' : 'Leer in ') + h.toFixed(1) + ' h';
     } else {
       eta.textContent = '';
     }
@@ -837,7 +822,7 @@ class RoxXorPVCard extends HTMLElement {
     const gridImport = Math.max(0, gridSigned);
     const gridExport = Math.max(0, -gridSigned);
     const aut = house > 50 ? Math.max(0, Math.min(100, ((house - gridImport) / house) * 100)) : 100;
-    root.getElementById('autarky').textContent = `AUTARKY: ${aut.toFixed(0)}%`;
+    root.getElementById('autarky').textContent = `AUTARKIE: ${aut.toFixed(0)}%`;
 
     let selfUse = 100;
     if (pvTotal > 50) {
@@ -846,7 +831,7 @@ class RoxXorPVCard extends HTMLElement {
     } else if (pvTotal <= 50 && gridExport > 0) {
       selfUse = 0;
     }
-    root.getElementById('selfBadge').textContent = `SELF-USE: ${selfUse.toFixed(0)}%`;
+    root.getElementById('selfBadge').textContent = `EIGENVERBRAUCH: ${selfUse.toFixed(0)}%`;
 
     // Warnings
     const warn = this._checkWarnings(soc, invTemp, pvTotal, gridSigned, battSigned);
@@ -947,7 +932,7 @@ class RoxXorPVCard extends HTMLElement {
 
     const evTodayVal = this._val(cfg.wallbox_energy_today, 'energy');
     if (evTodayVal !== null) {
-      evToday.textContent = `today: ${evTodayVal.toFixed(1)} kWh`;
+      evToday.textContent = `heute: ${evTodayVal.toFixed(1)} kWh`;
       evToday.setAttribute('opacity', '1');
     } else {
       evToday.setAttribute('opacity', '0');
@@ -957,8 +942,8 @@ class RoxXorPVCard extends HTMLElement {
     if (evModeVal) {
       // evcc Modi auf lesbare Kuerzel mappen
       const modeMap = {
-        'off': 'OFF',
-        'now': 'NOW',
+        'off': 'AUS',
+        'now': 'JETZT',
         'minpv': 'MIN+PV',
         'pv': 'PV',
       };
@@ -1040,7 +1025,7 @@ class RoxXorPVCard extends HTMLElement {
       fcFill.style.width = pct + '%';
       fcTodayEl.textContent = `${todayPv.toFixed(1)} / ${fcToday.toFixed(1)} kWh`;
       if (fcTomorrow !== null) {
-        fcTomorrowEl.textContent = `→ ${fcTomorrow.toFixed(1)} kWh tomorrow`;
+        fcTomorrowEl.textContent = `→ ${fcTomorrow.toFixed(1)} kWh morgen`;
         fcTomorrowEl.style.display = '';
       } else {
         fcTomorrowEl.style.display = 'none';
@@ -1059,9 +1044,9 @@ class RoxXorPVCard extends HTMLElement {
     const cost = gridImportToday * cfg.electricity_price;
     root.getElementById('ecoSavings').textContent = this._fmtMoney(savings);
     root.getElementById('ecoFeedin').textContent = this._fmtMoney(feedin);
-    root.getElementById('ecoFeedinSub').textContent = `${gridExportToday.toFixed(1)} kWh exported`;
+    root.getElementById('ecoFeedinSub').textContent = `${gridExportToday.toFixed(1)} kWh eingespeist`;
     root.getElementById('ecoCost').textContent = this._fmtMoney(cost);
-    root.getElementById('ecoCostSub').textContent = `${gridImportToday.toFixed(1)} kWh imported`;
+    root.getElementById('ecoCostSub').textContent = `${gridImportToday.toFixed(1)} kWh bezogen`;
 
     // Footer
     root.getElementById('fVolt').textContent = battVolt.toFixed(1) + ' V';
@@ -1089,15 +1074,15 @@ class RoxXorPVCard extends HTMLElement {
       if (bestAge < 60) {
         dot.classList.remove('stale');
         txt.textContent = 'online';
-        upd.textContent = `updated ${Math.round(bestAge)}s ago`;
+        upd.textContent = `aktualisiert vor ${Math.round(bestAge)} s`;
       } else if (bestAge < 3600) {
         dot.classList.add('stale');
-        txt.textContent = 'stale';
-        upd.textContent = `updated ${Math.round(bestAge / 60)}min ago`;
+        txt.textContent = 'veraltet';
+        upd.textContent = `aktualisiert vor ${Math.round(bestAge / 60)} min`;
       } else {
         dot.classList.add('stale');
         txt.textContent = 'offline?';
-        upd.textContent = `updated ${Math.round(bestAge / 3600)}h ago`;
+        upd.textContent = `aktualisiert vor ${Math.round(bestAge / 3600)} h`;
       }
     }
 
